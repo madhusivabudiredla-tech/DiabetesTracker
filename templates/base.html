@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Intelligence & Diagnostic Engine</title>
+    <!-- Tailwind CSS CDN for layout utility structure -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- LINKED SEPARATE CSS FILE -->
+    <link rel="stylesheet" href="{{ url_for('static', path='index.css') }}">
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Command Navigation -->
+    <header class="border-b border-slate-800/80 bg-slate-950/60 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-pink-600 flex items-center justify-center shadow-lg shadow-indigo-500/25 border border-white/10">
+                    <i class="fa-solid fa-heart-pulse text-white text-base"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-sm tracking-tight text-white block leading-none">NeuroHealth AI</span>
+                    <span class="text-[10px] text-indigo-400 font-mono tracking-widest uppercase mt-1 block">Clinical Decision Support Node</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:flex items-center space-x-2 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-full text-xs font-mono text-slate-300">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="text-emerald-400 font-medium">FastAPI Engine Live</span>
+                </div>
+                <span class="text-xs font-semibold text-indigo-300 bg-indigo-500/10 px-3 py-1 rounded-md border border-indigo-500/20">
+                    Production Build
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <p>&copy; 2026 Final Year Research Prototype. Built for Academic Defense.</p>
+            <p class="font-mono text-slate-400">Model Pipeline: Random Forest[cite: 1]</p>
+        </div>
+    </footer>
+
+</body>
+</html>
