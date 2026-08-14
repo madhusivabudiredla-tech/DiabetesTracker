@@ -1,60 +1,59 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
     
-    <!-- Left Column: System Telemetry Panel (4 Cols) -->
-    <div class="lg:col-span-4 space-y-6">
+    <!-- LEFT SIDEBAR: Model Specs & Architecture (Matches Screenshot) -->
+    <div class="lg:col-span-1 space-y-6">
         
-        <!-- Performance Metric Highlight Card -->
-        <div class="glass-container p-6 relative overflow-hidden group">
-            <div class="absolute -right-12 -top-12 w-40 h-40 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <!-- Card 1: Verified Model & Accuracy -->
+        <div class="glass-container p-6 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
             
-            <div class="flex justify-between items-start mb-6">
-                <div>
-                    <span class="text-[10px] font-mono uppercase tracking-widest text-indigo-300 bg-indigo-500/20 px-3 py-1 rounded-full border border-indigo-500/30">Verified Model</span>
-                    <h2 class="text-xl font-bold text-white mt-3 tracking-tight">Random Forest Pipeline</h2>
-                </div>
-                <div class="text-right">
-                    <span class="text-3xl font-black text-emerald-400 tracking-tight">89.38%</span>
-                    <span class="text-[10px] text-slate-400 block font-mono mt-0.5">Peak Accuracy</span>
-                </div>
+            <div class="inline-block px-3 py-1 bg-indigo-950/80 border border-indigo-700/50 rounded-full text-[10px] font-mono text-indigo-300 uppercase tracking-widest mb-4">
+                Verified Model
             </div>
-
-            <div class="space-y-3.5 pt-4 border-t border-slate-800 text-xs font-medium">
-                <div class="flex justify-between text-slate-400">
-                    <span>Baseline Dataset:</span>
-                    <span class="font-mono text-slate-200">800 Synthetic Records[cite: 1]</span>
+            
+            <div class="flex items-baseline space-x-2 mb-1">
+                <span class="text-4xl font-extrabold tracking-tight text-emerald-400 font-mono">{{ model_accuracy }}%</span>
+            </div>
+            <span class="text-xs text-slate-400 font-mono block mb-6">Peak Accuracy</span>
+            
+            <h4 class="text-sm font-bold text-white tracking-tight mb-4">Random Forest Pipeline</h4>
+            
+            <div class="space-y-3 text-xs text-slate-300 font-mono border-t border-slate-800/80 pt-4">
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Baseline Dataset:</span>
+                    <span class="text-white font-semibold">800 Synthetic Records</span>
                 </div>
-                <div class="flex justify-between text-slate-400">
-                    <span>Evaluated Algorithms:</span>
-                    <span class="font-mono text-slate-200">13 Core Models[cite: 1]</span>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Evaluated Algorithms:</span>
+                    <span class="text-white font-semibold">13 Core Models</span>
                 </div>
-                <div class="flex justify-between text-slate-400">
-                    <span>Feature Engineering:</span>
-                    <span class="font-mono text-slate-200">Standard Scaler + Job Type[cite: 1]</span>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Feature Engineering:</span>
+                    <span class="text-white font-semibold">Standard Scaler + Job Type</span>
                 </div>
             </div>
         </div>
 
-        <!-- Architecture Brief -->
-        <div class="glass-container p-6 text-slate-300 text-xs space-y-3">
-            <div class="flex items-center space-x-2 text-indigo-400 font-semibold text-sm">
-                <i class="fa-solid fa-circle-nodes"></i>
+        <!-- Card 2: Multi-Tier Architecture -->
+        <div class="glass-container p-6">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-3 flex items-center space-x-2">
+                <i class="fa-solid fa-network-wired text-[11px]"></i>
                 <span>Multi-Tier Architecture</span>
-            </div>
-            <p class="leading-relaxed text-slate-400">
+            </h4>
+            <p class="text-xs text-slate-400 leading-relaxed font-sans">
                 This software connects an HTML5 responsive client layer to a high-speed FastAPI asynchronous backend server, executing live inference via serialized joblib weights.
             </p>
         </div>
 
     </div>
 
-    <!-- Right Column: Interactive Clinical Workspace (8 Cols) -->
-    <div class="lg:col-span-8">
+    <!-- RIGHT MAIN CONTENT: Patient Diagnostics Portal Form -->
+    <div class="lg:col-span-2">
         <div class="glass-container overflow-hidden">
             
-            <!-- Workspace Header -->
             <div class="px-8 py-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/30">
                 <div>
                     <h3 class="text-base font-bold text-white tracking-tight flex items-center space-x-2">
@@ -63,23 +62,28 @@
                     </h3>
                     <p class="text-xs text-slate-400 mt-0.5">Enter validated patient metrics to trigger real-time AI classification.</p>
                 </div>
-                <div>
-                    <span class="text-[11px] font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-                        Online
-                    </span>
-                </div>
+                <span class="text-xs font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/50 px-2.5 py-1 rounded-full">Online</span>
             </div>
 
-            <!-- Form Workspace -->
-            <form action="/predict" method="post" class="p-8 space-y-8">
+            <form action="/predict" method="post" class="p-8 space-y-6">
                 
-                <!-- Section 1 -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-4 flex items-center space-x-2">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-3 flex items-center space-x-2">
+                        <i class="fa-solid fa-user text-[11px]"></i>
+                        <span>Patient Identification</span>
+                    </h4>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-2">Patient Full Name</label>
+                        <input type="text" name="patient_name" required placeholder="e.g. Rahul Sharma" class="clinical-input">
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-3 flex items-center space-x-2">
                         <i class="fa-solid fa-id-card text-[11px]"></i>
                         <span>Demographics & History</span>
                     </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-medium text-slate-300 mb-2">Number of Pregnancies</label>
                             <input type="number" name="pregnancies" required value="0" min="0" class="clinical-input">
@@ -91,13 +95,12 @@
                     </div>
                 </div>
 
-                <!-- Section 2 -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-4 flex items-center space-x-2">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-3 flex items-center space-x-2">
                         <i class="fa-solid fa-vials text-[11px]"></i>
                         <span>Metabolic & Clinical Biomarkers</span>
                     </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-medium text-slate-300 mb-2">Glucose Level (mg/dL)</label>
                             <input type="number" name="glucose" required placeholder="e.g. 120" class="clinical-input">
@@ -117,13 +120,12 @@
                     </div>
                 </div>
 
-                <!-- Section 3 -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-4 flex items-center space-x-2">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-400 mb-3 flex items-center space-x-2">
                         <i class="fa-solid fa-briefcase-medical text-[11px]"></i>
                         <span>Physical & Environmental Factors</span>
                     </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-medium text-slate-300 mb-2">BMI (Body Mass Index)</label>
                             <input type="number" step="0.1" name="bmi" required placeholder="e.g. 25.5" class="clinical-input">
@@ -139,8 +141,7 @@
                     </div>
                 </div>
 
-                <!-- Submit Action Button -->
-                <div class="pt-4 border-t border-slate-800">
+                <div class="pt-2">
                     <button type="submit" class="btn-inference flex items-center justify-center space-x-3">
                         <i class="fa-solid fa-microchip text-amber-300"></i>
                         <span>Execute AI Prediction Model</span>
@@ -149,7 +150,6 @@
 
             </form>
 
-            <!-- Result Console Component -->
             {% if prediction_text %}
                 <div class="px-8 pb-8 pt-0">
                     <div class="rounded-2xl p-6 {% if is_diabetic %}bg-rose-950/60 border border-rose-700/50 text-rose-200{% else %}bg-emerald-950/60 border border-emerald-700/50 text-emerald-200{% endif %} flex items-center space-x-4 shadow-2xl backdrop-blur-md">
